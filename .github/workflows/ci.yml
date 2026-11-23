@@ -28,7 +28,7 @@ permissions: {}
 
 jobs:
   ci:
-    uses: skathio/hashira/.github/workflows/npm-package-ci.yml@v3
+    uses: skathio/hashira/.github/workflows/npm-package-ci.yml@30615b7c0bbaf15866ad4610323d0a9c504ee856
     permissions:
       contents: read # check out the repository
       pull-requests: write # commitlint and coverage comments on the pull request
@@ -70,7 +70,7 @@ jobs:
     steps:
       # actions/checkout v4.2.2
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-      - uses: skathio/hashira/.github/actions/npm-release@v3
+      - uses: skathio/hashira/.github/actions/npm-release@30615b7c0bbaf15866ad4610323d0a9c504ee856
         id: release
         with:
           version: ${{ needs.ci.outputs.resolved_version }}
