@@ -90,7 +90,7 @@ jobs:
           mkdir -p "${consumer}"
           cd "${consumer}"
           npm init -y >/dev/null
-          npm install "${name}@${RESOLVED_VERSION}" --registry "${REGISTRY}" --no-audit --no-fund
+          npm_config_registry="${REGISTRY}" npm install "${name}@${RESOLVED_VERSION}" --no-audit --no-fund
           installed="$(node -p "require('${name}/package.json').version")"
           if [[ "${installed}" != "${RESOLVED_VERSION}" ]]; then
             echo "::error::installed ${name}@${installed} from ${REGISTRY}, expected ${RESOLVED_VERSION}"
