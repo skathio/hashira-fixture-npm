@@ -28,10 +28,10 @@ permissions: {}
 
 jobs:
   ci:
-    uses: skathio/hashira/.github/workflows/npm-package-ci.yml@v3
+    uses: skathio/hashira/.github/workflows/npm-package-ci.yml@bdde31cc61f7c406e86ff1da31dd747815f11dff
     permissions:
       contents: read # check out the repository
-      pull-requests: write # commitlint and coverage comments on the pull request
+      pull-requests: write # CI summary comment on the pull request
       security-events: write # upload CodeQL results when CodeQL is enabled
   publish:
     needs: ci
@@ -70,7 +70,7 @@ jobs:
     steps:
       # actions/checkout v4.2.2
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-      - uses: skathio/hashira/.github/actions/npm-release@v3
+      - uses: skathio/hashira/.github/actions/npm-release@bdde31cc61f7c406e86ff1da31dd747815f11dff
         id: release
         with:
           version: ${{ needs.ci.outputs.resolved_version }}
