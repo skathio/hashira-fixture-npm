@@ -17,9 +17,9 @@ on:
   workflow_dispatch:
     inputs:
       bump:
-        description: "Cut a release: patch, minor or major. Empty runs CI only."
+        description: "Cut a release: patch, minor or major. none runs CI only."
         type: choice
-        options: ['', patch, minor, major]
+        options: [none, patch, minor, major]
       seed_version:
         description: "Baseline for the first release when no stable tag exists, e.g. 0.0.0."
         type: string
@@ -28,10 +28,10 @@ permissions: {}
 
 jobs:
   ci:
-    uses: skathio/hashira/.github/workflows/npm-package-ci.yml@v3
+    uses: skathio/hashira/.github/workflows/npm-package-ci.yml@dcb803388242d52101f333bf81904263fe977440
     permissions:
       contents: read # check out the repository
-      pull-requests: write # commitlint and coverage comments on the pull request
+      pull-requests: write # CI summary comment on the pull request
       security-events: write # upload CodeQL results when CodeQL is enabled
   publish:
     needs: ci
@@ -68,9 +68,9 @@ jobs:
           --health-cmd "wget -q -O /dev/null http://127.0.0.1:4873/-/ping"
           --health-interval 2s --health-timeout 5s --health-retries 30
     steps:
-      # actions/checkout v4.2.2
+      # actions/checkout v7.0.1
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-      - uses: skathio/hashira/.github/actions/npm-release@v3
+      - uses: skathio/hashira/.github/actions/npm-release@dcb803388242d52101f333bf81904263fe977440
         id: release
         with:
           version: ${{ needs.ci.outputs.resolved_version }}
